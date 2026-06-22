@@ -9,7 +9,7 @@ import { ClienteList } from "@/components/clientes/ClienteList";
 import { useClientes } from "@/hooks/useClientes";
 
 export default function ClientesPage() {
-  const { clientes, carregarClientes, removerCliente } = useClientes();
+  const { clientes, carregarClientes, editarCliente, removerCliente } = useClientes();
 
   useEffect(() => {
     carregarClientes();
@@ -31,6 +31,7 @@ export default function ClientesPage() {
 
         <ClienteList
           clientes={clientes}
+          onEditarCliente={editarCliente}
           onRemoverCliente={removerCliente}
         />
       </Card>

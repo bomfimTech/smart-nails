@@ -29,6 +29,29 @@ export function useClientes() {
     return novoCliente;
   };
 
+  const editarCliente = async (
+    id: number,
+    data: Partial<CreateClienteDTO>
+  ) => {
+    const response = await fetch("/api/clientes", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, ...data }),
+    });
+
+    const clienteAtualizado = await response.json();
+
+    setClientes((clientesAtuais) =>
+      clientesAtuais.map((cliente) =>
+        cliente.id === id ? clienteAtualizado : cliente
+      )
+    );
+
+    return clienteAtualizado;
+  };
+
   const removerCliente = async (id: number) => {
     await fetch("/api/clientes", {
       method: "DELETE",
@@ -47,6 +70,7 @@ export function useClientes() {
     clientes,
     carregarClientes,
     criarCliente,
+    editarCliente,
     removerCliente,
   };
 }
