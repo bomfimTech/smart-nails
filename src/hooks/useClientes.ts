@@ -6,6 +6,14 @@ import type { Cliente } from "@/shared/types/cliente";
 export function useClientes() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
 
+  const carregarClientes = async () => {
+    const response = await fetch("/api/clientes");
+
+    const data = await response.json();
+
+    setClientes(data);
+  };
+
   const criarCliente = async (data: CreateClienteDTO) => {
     const response = await fetch("/api/clientes", {
       method: "POST",
@@ -24,6 +32,7 @@ export function useClientes() {
 
   return {
     clientes,
+    carregarClientes,
     criarCliente,
   };
 }

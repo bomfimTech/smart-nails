@@ -1,9 +1,9 @@
 import { ClienteRepository } from "../repositories/cliente.repository";
 
-export class ListClientesUseCase {
-  async execute() {
+export class DeleteClienteUseCase {
+  async execute(id: number) {
     const clienteRepository = new ClienteRepository();
 
-    return await clienteRepository.list();
+    await clienteRepository.delete(id);
   }
 }
