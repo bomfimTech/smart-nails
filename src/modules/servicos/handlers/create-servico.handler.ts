@@ -1,5 +1,10 @@
-import { CreateServicoDTO } from "../dto/create-servico.dto";
 import { CreateServicoUseCase } from "../usecases/create-servico.usecase";
+
+type CreateServicoDTO = {
+  nome: string;
+  duracao: number;
+  preco: number;
+};
 
 export class CreateServicoHandler {
   async handle(data: CreateServicoDTO) {

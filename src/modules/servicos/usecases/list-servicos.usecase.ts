@@ -1,18 +1,9 @@
+import { ServicoRepository } from "../repositories/servico.repository";
+
 export class ListServicosUseCase {
   async execute() {
-    return [
-      {
-        id: 1,
-        nome: "Manicure",
-        duracao: 60,
-        preco: 35,
-      },
-      {
-        id: 2,
-        nome: "Pedicure",
-        duracao: 90,
-        preco: 50,
-      },
-    ];
+    const servicoRepository = new ServicoRepository();
+
+    return await servicoRepository.list();
   }
 }

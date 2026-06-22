@@ -1,22 +1,15 @@
-import { CreateServicoDTO } from "../dto/create-servico.dto";
+import { ServicoRepository } from "../repositories/servico.repository";
+
+type CreateServicoDTO = {
+  nome: string;
+  duracao: number;
+  preco: number;
+};
 
 export class CreateServicoUseCase {
   async execute(data: CreateServicoDTO) {
-    if (!data.nome) {
-      throw new Error("Nome é obrigatório");
-    }
+    const servicoRepository = new ServicoRepository();
 
-    if (data.duracao <= 0) {
-      throw new Error("Duração inválida");
-    }
-
-    if (data.preco <= 0) {
-      throw new Error("Preço inválido");
-    }
-
-    return {
-      id: Date.now(),
-      ...data,
-    };
+    return await servicoRepository.create(data);
   }
 }
