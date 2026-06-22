@@ -8,7 +8,6 @@ export function useClientes() {
 
   const carregarClientes = async () => {
     const response = await fetch("/api/clientes");
-
     const data = await response.json();
 
     setClientes(data);
@@ -30,9 +29,24 @@ export function useClientes() {
     return novoCliente;
   };
 
+  const removerCliente = async (id: number) => {
+    await fetch("/api/clientes", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+
+    setClientes((clientesAtuais) =>
+      clientesAtuais.filter((cliente) => cliente.id !== id)
+    );
+  };
+
   return {
     clientes,
     carregarClientes,
     criarCliente,
+    removerCliente,
   };
 }

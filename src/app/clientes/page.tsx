@@ -9,7 +9,7 @@ import { ClienteList } from "@/components/clientes/ClienteList";
 import { useClientes } from "@/hooks/useClientes";
 
 export default function ClientesPage() {
-  const { clientes, carregarClientes } = useClientes();
+  const { clientes, carregarClientes, removerCliente } = useClientes();
 
   useEffect(() => {
     carregarClientes();
@@ -28,7 +28,11 @@ export default function ClientesPage() {
 
       <Card>
         <h2 className="mb-4 text-xl font-semibold">Clientes cadastrados</h2>
-        <ClienteList clientes={clientes} />
+
+        <ClienteList
+          clientes={clientes}
+          onRemoverCliente={removerCliente}
+        />
       </Card>
     </div>
   );
