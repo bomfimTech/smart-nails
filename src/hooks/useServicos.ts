@@ -48,10 +48,34 @@ export function useServicos() {
     );
   };
 
+    const editarServico = async (
+    id: number,
+    data: Partial<CreateServicoDTO>
+  ) => {
+    const response = await fetch("/api/servicos", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, ...data }),
+    });
+
+    const servicoAtualizado = await response.json();
+
+    setServicos((servicosAtuais) =>
+      servicosAtuais.map((servico) =>
+        servico.id === id ? servicoAtualizado : servico
+      )
+    );
+
+    return servicoAtualizado;
+  };
+
   return {
     servicos,
     carregarServicos,
     criarServico,
     removerServico,
+    editarServico,
   };
 }
