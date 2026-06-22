@@ -1,4 +1,5 @@
 import { CreateClienteDTO } from "../dto/create-cliente.dto";
+import { ClienteRepository } from "../repositories/cliente.repository";
 
 export class CreateClienteUseCase {
   async execute(data: CreateClienteDTO) {
@@ -14,11 +15,14 @@ export class CreateClienteUseCase {
       throw new Error("Email é obrigatório");
     }
 
-    return {
-      id: Date.now(),
+    const clienteRepository = new ClienteRepository();
+
+    const cliente = await clienteRepository.create({
       nome: data.nome,
       telefone: data.telefone,
       email: data.email,
-    };
+    });
+
+    return cliente;
   }
 }
