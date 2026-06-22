@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { ListServicosHandler } from "@/modules/servicos/handlers/list-servicos.handler";
 import { CreateServicoHandler } from "@/modules/servicos/handlers/create-servico.handler";
+import { DeleteServicoHandler } from "@/modules/servicos/handlers/delete-servico.handler";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -18,4 +19,17 @@ export async function GET() {
   const servicos = await handler.handle();
 
   return NextResponse.json(servicos);
+}
+
+export async function DELETE(request: Request) {
+  const { id } = await request.json();
+
+  const handler = new DeleteServicoHandler();
+
+  await handler.handle(id);
+
+  return NextResponse.json(
+    { message: "Serviço removido com sucesso" },
+    { status: 200 }
+  );
 }

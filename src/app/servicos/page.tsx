@@ -9,7 +9,11 @@ import { ServicoList } from "@/components/servicos/ServicoList";
 import { useServicos } from "@/hooks/useServicos";
 
 export default function ServicosPage() {
-  const { servicos, carregarServicos } = useServicos();
+  const {
+      servicos,
+      carregarServicos,
+      removerServico,
+    } = useServicos();
 
   useEffect(() => {
     carregarServicos();
@@ -25,7 +29,10 @@ export default function ServicosPage() {
 
       <Card>
         <h2 className="mb-4 text-xl font-semibold">Serviços cadastrados</h2>
-        <ServicoList servicos={servicos} />
+        <ServicoList
+          servicos={servicos}
+          onRemoverServico={removerServico}
+        />
       </Card>
     </div>
   );

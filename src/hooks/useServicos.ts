@@ -34,9 +34,24 @@ export function useServicos() {
     return novoServico;
   };
 
+    const removerServico = async (id: number) => {
+    await fetch("/api/servicos", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+
+    setServicos((servicosAtuais) =>
+      servicosAtuais.filter((servico) => servico.id !== id)
+    );
+  };
+
   return {
     servicos,
     carregarServicos,
     criarServico,
+    removerServico,
   };
 }
