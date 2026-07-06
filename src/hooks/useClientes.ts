@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import type { CreateClienteDTO } from "@/modules/clientes/dto/create-cliente.dto";
-import type { Cliente } from "@/shared/types/cliente";
+import type { Cliente } from "@/shared/types/domain/cliente";
 
 export function useClientes() {
   const [clientes, setClientes] = useState<Cliente[]>([]);

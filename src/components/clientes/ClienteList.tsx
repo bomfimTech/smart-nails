@@ -1,5 +1,5 @@
 import type { CreateClienteDTO } from "@/modules/clientes/dto/create-cliente.dto";
-import type { Cliente } from "@/shared/types/cliente";
+import type { Cliente } from "@/shared/types/domain/cliente";
 
 type ClienteListProps = {
   clientes: Cliente[];

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { Agendamento } from "@/shared/types/agendamento";
+import type { Agendamento } from "@/shared/types/domain/agendamento";
 
 export function useAgendamentos() {
   const [agendamentos, setAgendamentos] = useState<Agendamento[]>([]);

@@ -3,4 +3,5 @@ export type Horario = {
   diaSemana: string;
   horaInicio: string;
   horaFim: string;
+  ativo: boolean;
 };

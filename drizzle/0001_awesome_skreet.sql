@@ -1,0 +1,1 @@
+ALTER TABLE `horarios` ADD `ativo` integer NOT NULL;

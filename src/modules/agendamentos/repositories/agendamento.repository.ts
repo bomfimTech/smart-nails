@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 
 import { db } from "@/infrastructure/database";
 import { agendamentos } from "@/infrastructure/database/schemas/agendamento.schema";
-import type { Agendamento } from "@/shared/types/agendamento";
+import type { Agendamento } from "@/shared/types/domain/agendamento";
 
 export class AgendamentoRepository {
   async list() {

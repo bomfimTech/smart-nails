@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 
 import { db } from "@/infrastructure/database";
 import { horarios } from "@/infrastructure/database/schemas/horario.schema";
-import type { Horario } from "@/shared/types/horario";
+import type { Horario } from "@/shared/types/domain/horario";
 
 export class HorarioRepository {
   async list() {

@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 
 import { db } from "@/infrastructure/database";
 import { servicos } from "@/infrastructure/database/schemas/servico.schema";
-import type { Servico } from "@/shared/types/servico";
+import type { Servico } from "@/shared/types/domain/servico";
 
 export class ServicoRepository {
   async list() {

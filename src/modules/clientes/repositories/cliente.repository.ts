@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 
 import { db } from "@/infrastructure/database";
 import { clientes } from "@/infrastructure/database/schemas/cliente.schema";
-import type { Cliente } from "@/shared/types/cliente";
+import type { Cliente } from "@/shared/types/domain/cliente";
 
 export class ClienteRepository {
   async list() {

@@ -5,4 +5,5 @@ export const horarios = sqliteTable("horarios", {
   diaSemana: text("dia_semana").notNull(),
   horaInicio: text("hora_inicio").notNull(),
   horaFim: text("hora_fim").notNull(),
+  ativo: integer("ativo", { mode: "boolean" }).notNull(),
 });

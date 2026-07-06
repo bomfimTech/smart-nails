@@ -1,4 +1,4 @@
-import type { Servico } from "@/shared/types/servico";
+import type { Servico } from "@/shared/types/domain/servico";
 
 type ServicoListProps = {
   servicos: Servico[];

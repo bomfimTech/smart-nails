@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { Servico } from "@/shared/types/servico";
+import type { Servico } from "@/shared/types/domain/servico";
 
 type CreateServicoDTO = {
   nome: string;

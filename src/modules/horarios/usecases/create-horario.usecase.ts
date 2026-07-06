@@ -1,4 +1,5 @@
 import { CreateHorarioDTO } from "../dto/create-horario.dto";
+import { HorarioRepository } from "../repositories/horario.repository";
 
 export class CreateHorarioUseCase {
   async execute(data: CreateHorarioDTO) {
@@ -18,11 +19,13 @@ export class CreateHorarioUseCase {
       throw new Error("Hora de início deve ser menor que a hora de fim");
     }
 
-    return {
-      id: Date.now(),
+    const horarioRepository = new HorarioRepository();
+
+    return await horarioRepository.create({
       diaSemana: data.diaSemana,
       horaInicio: data.horaInicio,
       horaFim: data.horaFim,
-    };
+      ativo: true,
+    });
   }
 }
