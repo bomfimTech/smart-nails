@@ -1,18 +1,14 @@
 import { useState } from "react";
 
 import type { Horario } from "@/shared/types/domain/horario";
-
-type CreateHorarioDTO = {
-  diaSemana: string;
-  horaInicio: string;
-  horaFim: string;
-};
+import type { CreateHorarioDTO } from "@/modules/horarios/dto/create-horario.dto";
 
 export function useHorarios() {
   const [horarios, setHorarios] = useState<Horario[]>([]);
 
   const carregarHorarios = async () => {
     const response = await fetch("/api/horarios");
+
     const data = await response.json();
 
     setHorarios(data);
@@ -29,7 +25,10 @@ export function useHorarios() {
 
     const novoHorario = await response.json();
 
-    setHorarios((horariosAtuais) => [...horariosAtuais, novoHorario]);
+    setHorarios((horariosAtuais) => [
+      ...horariosAtuais,
+      novoHorario,
+    ]);
 
     return novoHorario;
   };
