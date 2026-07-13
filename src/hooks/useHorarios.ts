@@ -33,9 +33,48 @@ export function useHorarios() {
     return novoHorario;
   };
 
+    const removerHorario = async (id: number) => {
+    await fetch("/api/horarios", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+
+    setHorarios((horariosAtuais) =>
+      horariosAtuais.filter((horario) => horario.id !== id)
+    );
+  };
+
+    const editarHorario = async (
+    id: number,
+    data: Partial<CreateHorarioDTO>
+  ) => {
+    const response = await fetch("/api/horarios", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, ...data }),
+    });
+
+    const horarioAtualizado = await response.json();
+
+    setHorarios((horariosAtuais) =>
+      horariosAtuais.map((horario) =>
+        horario.id === id ? horarioAtualizado : horario
+      )
+    );
+
+    return horarioAtualizado;
+  };
+
   return {
     horarios,
     carregarHorarios,
     criarHorario,
+    removerHorario,
+    editarHorario,
   };
 }

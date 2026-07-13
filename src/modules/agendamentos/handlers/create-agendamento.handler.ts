@@ -3,7 +3,8 @@ import { CreateAgendamentoUseCase } from "../usecases/create-agendamentos.usecas
 
 export class CreateAgendamentoHandler {
   async handle(data: CreateAgendamentoDTO) {
-    const createAgendamentoUseCase = new CreateAgendamentoUseCase();
+    const createAgendamentoUseCase =
+      new CreateAgendamentoUseCase();
 
     return await createAgendamentoUseCase.execute(data);
   }

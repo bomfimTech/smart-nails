@@ -1,8 +1,16 @@
+export type StatusAgendamento =
+  | "Agendado"
+  | "Concluído"
+  | "Cancelado";
+
 export type Agendamento = {
   id: number;
-  data: Date;
-  hora: string;
+
   clienteId: number;
   servicoId: number;
-  status: string;
+
+  data: string;
+  horaInicio: string;
+
+  status: StatusAgendamento;
 };

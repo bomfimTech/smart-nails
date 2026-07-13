@@ -9,7 +9,12 @@ import { HorarioList } from "@/components/horarios/HorarioList";
 import { useHorarios } from "@/hooks/useHorarios";
 
 export default function HorariosPage() {
-  const { horarios, carregarHorarios } = useHorarios();
+  const {
+  horarios,
+  carregarHorarios,
+  editarHorario,
+  removerHorario,
+} = useHorarios();
 
   useEffect(() => {
     carregarHorarios();
@@ -31,7 +36,12 @@ export default function HorariosPage() {
           Horários cadastrados
         </h2>
 
-        <HorarioList horarios={horarios} />
+          <HorarioList
+            horarios={horarios}
+            onEditarHorario={editarHorario}
+            onRemoverHorario={removerHorario}
+
+          />
       </Card>
     </div>
   );

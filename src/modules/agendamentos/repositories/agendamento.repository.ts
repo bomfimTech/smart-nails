@@ -1,49 +1,38 @@
+import { db } from "@/infrastructure/database";
+import { agendamentosTable } from "@/infrastructure/database/schemas/agendamento.schema";
+
 import { eq } from "drizzle-orm";
 
-import { db } from "@/infrastructure/database";
-import { agendamentos } from "@/infrastructure/database/schemas/agendamento.schema";
-import type { Agendamento } from "@/shared/types/domain/agendamento";
-
 export class AgendamentoRepository {
-  async list() {
-    return db.select().from(agendamentos);
-  }
-
-  async findById(id: number) {
-    const result = await db
-      .select()
-      .from(agendamentos)
-      .where(eq(agendamentos.id, id));
-
-    return result[0];
-  }
-
-  async create(agendamento: Omit<Agendamento, "id">) {
-    const result = await db
-      .insert(agendamentos)
-      .values({
-        ...agendamento,
-        data: agendamento.data.toISOString(),
-      })
+  async create(data: typeof agendamentosTable.$inferInsert) {
+    const [agendamento] = await db
+      .insert(agendamentosTable)
+      .values(data)
       .returning();
 
-    return result[0];
+    return agendamento;
   }
 
-  async update(id: number, agendamento: Partial<Omit<Agendamento, "id">>) {
-    const result = await db
-      .update(agendamentos)
-      .set({
-        ...agendamento,
-        data: agendamento.data?.toISOString(),
-      })
-      .where(eq(agendamentos.id, id))
+  async findAll() {
+    return await db.select().from(agendamentosTable);
+  }
+
+  async update(
+    id: number,
+    data: Partial<typeof agendamentosTable.$inferInsert>
+  ) {
+    const [agendamento] = await db
+      .update(agendamentosTable)
+      .set(data)
+      .where(eq(agendamentosTable.id, id))
       .returning();
 
-    return result[0];
+    return agendamento;
   }
 
   async delete(id: number) {
-    await db.delete(agendamentos).where(eq(agendamentos.id, id));
+    await db
+      .delete(agendamentosTable)
+      .where(eq(agendamentosTable.id, id));
   }
 }

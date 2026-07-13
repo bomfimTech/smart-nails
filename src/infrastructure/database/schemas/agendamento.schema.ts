@@ -3,10 +3,12 @@ import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { clientes } from "./cliente.schema";
 import { servicos } from "./servico.schema";
 
-export const agendamentos = sqliteTable("agendamentos", {
+export const agendamentosTable = sqliteTable("agendamentos", {
   id: integer("id").primaryKey({ autoIncrement: true }),
+
   data: text("data").notNull(),
-  hora: text("hora").notNull(),
+
+  horaInicio: text("hora_inicio").notNull(),
 
   clienteId: integer("cliente_id")
     .notNull()

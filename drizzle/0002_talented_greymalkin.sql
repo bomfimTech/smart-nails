@@ -1,0 +1,1 @@
+ALTER TABLE `agendamentos` RENAME COLUMN "hora" TO "hora_inicio";
