@@ -95,7 +95,7 @@ Acesse [http://localhost:3000](http://localhost:3000)
 
 ## 👤 Autor
 
-**João Gabriel Gomes dos S. Bomfim & Maria Vitória dos Santos**
+**João Gabriel Gomes dos S. Bomfim & Maria Vitória Teodorio Barbosa Bomfim**
 
 ---
 
