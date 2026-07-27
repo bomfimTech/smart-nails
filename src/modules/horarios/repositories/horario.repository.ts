@@ -10,12 +10,29 @@ export class HorarioRepository {
   }
 
   async findById(id: number) {
-    const result = await db.select().from(horarios).where(eq(horarios.id, id));
+    const result = await db
+      .select()
+      .from(horarios)
+      .where(eq(horarios.id, id));
+
+    return result[0];
+  }
+
+  async findByDiaSemana(diaSemana: string) {
+    const result = await db
+      .select()
+      .from(horarios)
+      .where(eq(horarios.diaSemana, diaSemana));
+
     return result[0];
   }
 
   async create(horario: Omit<Horario, "id">) {
-    const result = await db.insert(horarios).values(horario).returning();
+    const result = await db
+      .insert(horarios)
+      .values(horario)
+      .returning();
+
     return result[0];
   }
 

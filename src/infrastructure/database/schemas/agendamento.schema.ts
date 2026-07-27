@@ -1,22 +1,22 @@
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { integer, pgTable, text } from "drizzle-orm/pg-core";
 
 import { clientes } from "./cliente.schema";
 import { servicos } from "./servico.schema";
 
-export const agendamentosTable = sqliteTable("agendamentos", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
+export const agendamentosTable = pgTable("agendamentos", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
 
-  data: text("data").notNull(),
+  data: text().notNull(),
 
-  horaInicio: text("hora_inicio").notNull(),
+  horaInicio: text().notNull(),
 
-  clienteId: integer("cliente_id")
+  clienteId: integer()
     .notNull()
     .references(() => clientes.id),
 
-  servicoId: integer("servico_id")
+  servicoId: integer()
     .notNull()
     .references(() => servicos.id),
 
-  status: text("status").notNull(),
+  status: text().notNull(),
 });
