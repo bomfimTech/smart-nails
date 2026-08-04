@@ -1,66 +1,39 @@
 import { useState } from "react";
 
+import { carregarServicosAction } from "@/actions/servicos/carregar-servicos.action";
+import { criarServicoAction } from "@/actions/servicos/criar-servico.action";
+import { editarServicoAction } from "@/actions/servicos/editar-servico.action";
+import { removerServicoAction } from "@/actions/servicos/remover-servico.action";
+
 import type { Servico } from "@/shared/types/domain/servico";
 
-type CreateServicoDTO = {
-  nome: string;
-  duracao: number;
-  preco: number;
-};
+import type { CreateServicoDTO } from "@/modules/servicos/dto/create-servico.dto";
 
 export function useServicos() {
   const [servicos, setServicos] = useState<Servico[]>([]);
 
   const carregarServicos = async () => {
-    const response = await fetch("/api/servicos");
-    const data = await response.json();
+    const data = await carregarServicosAction();
 
     setServicos(data);
   };
 
   const criarServico = async (data: CreateServicoDTO) => {
-    const response = await fetch("/api/servicos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const novoServico = await criarServicoAction(data);
 
-    const novoServico = await response.json();
-
-    setServicos((servicosAtuais) => [...servicosAtuais, novoServico]);
+    setServicos((servicosAtuais) => [
+      ...servicosAtuais,
+      novoServico,
+    ]);
 
     return novoServico;
   };
 
-    const removerServico = async (id: number) => {
-    await fetch("/api/servicos", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id }),
-    });
-
-    setServicos((servicosAtuais) =>
-      servicosAtuais.filter((servico) => servico.id !== id)
-    );
-  };
-
-    const editarServico = async (
+  const editarServico = async (
     id: number,
     data: Partial<CreateServicoDTO>
   ) => {
-    const response = await fetch("/api/servicos", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id, ...data }),
-    });
-
-    const servicoAtualizado = await response.json();
+    const servicoAtualizado = await editarServicoAction(id, data);
 
     setServicos((servicosAtuais) =>
       servicosAtuais.map((servico) =>
@@ -71,11 +44,19 @@ export function useServicos() {
     return servicoAtualizado;
   };
 
+  const removerServico = async (id: number) => {
+    await removerServicoAction(id);
+
+    setServicos((servicosAtuais) =>
+      servicosAtuais.filter((servico) => servico.id !== id)
+    );
+  };
+
   return {
     servicos,
     carregarServicos,
     criarServico,
-    removerServico,
     editarServico,
+    removerServico,
   };
 }

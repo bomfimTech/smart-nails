@@ -1,5 +1,10 @@
 import { useState } from "react";
 
+import { carregarClientesAction } from "@/actions/clientes/carregar-clientes.action";
+import { criarClienteAction } from "@/actions/clientes/criar-cliente.action";
+import { editarClienteAction } from "@/actions/clientes/editar-cliente.action";
+import { removerClienteAction } from "@/actions/clientes/remover-cliente.action";
+
 import type { CreateClienteDTO } from "@/modules/clientes/dto/create-cliente.dto";
 import type { Cliente } from "@/shared/types/domain/cliente";
 
@@ -7,24 +12,18 @@ export function useClientes() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
 
   const carregarClientes = async () => {
-    const response = await fetch("/api/clientes");
-    const data = await response.json();
+    const data = await carregarClientesAction();
 
     setClientes(data);
   };
 
   const criarCliente = async (data: CreateClienteDTO) => {
-    const response = await fetch("/api/clientes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const novoCliente = await criarClienteAction(data);
 
-    const novoCliente = await response.json();
-
-    setClientes((clientesAtuais) => [...clientesAtuais, novoCliente]);
+    setClientes((clientesAtuais) => [
+      ...clientesAtuais,
+      novoCliente,
+    ]);
 
     return novoCliente;
   };
@@ -33,15 +32,7 @@ export function useClientes() {
     id: number,
     data: Partial<CreateClienteDTO>
   ) => {
-    const response = await fetch("/api/clientes", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id, ...data }),
-    });
-
-    const clienteAtualizado = await response.json();
+    const clienteAtualizado = await editarClienteAction(id, data);
 
     setClientes((clientesAtuais) =>
       clientesAtuais.map((cliente) =>
@@ -53,13 +44,7 @@ export function useClientes() {
   };
 
   const removerCliente = async (id: number) => {
-    await fetch("/api/clientes", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id }),
-    });
+    await removerClienteAction(id);
 
     setClientes((clientesAtuais) =>
       clientesAtuais.filter((cliente) => cliente.id !== id)
