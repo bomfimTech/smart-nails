@@ -1,16 +1,12 @@
-export type StatusAgendamento =
-  | "Agendado"
-  | "Concluído"
-  | "Cancelado";
 
-export type Agendamento = {
+import type { Servico } from "./servico";
+
+export interface Agendamento {
   id: number;
-
   clienteId: number;
-  servicoId: number;
-
+  servicos: Servico[];
   data: string;
   horaInicio: string;
-
-  status: StatusAgendamento;
-};
+  horaFim: string;
+  status: string;
+}

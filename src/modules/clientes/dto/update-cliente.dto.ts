@@ -1,6 +1,3 @@
-export interface UpdateClienteDTO {
-  id: number;
-  nome?: string;
-  telefone?: string;
-  email?: string;
-}
+import { CreateClienteDTO } from "./create-cliente.dto"; 
+
+export type UpdateClienteDTO = Partial<CreateClienteDTO>;

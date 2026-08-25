@@ -1,3 +1,3 @@
 import { Cliente } from "@/shared/types/domain/cliente";
 
-export type CreateClienteDTO = Omit<Cliente, "id">;
+export type RespostaClienteDTO = Cliente;

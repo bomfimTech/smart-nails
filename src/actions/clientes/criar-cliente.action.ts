@@ -1,15 +1,15 @@
 import type { CreateClienteDTO } from "@/modules/clientes/dto/create-cliente.dto";
-import type { Cliente } from "@/shared/types/domain/cliente";
+import type { RespostaClienteDTO } from "@/modules/clientes/dto/cliente-resposta.dto";
 
 export async function criarClienteAction(
-  data: CreateClienteDTO
-): Promise<Cliente> {
+  dados: CreateClienteDTO
+): Promise<RespostaClienteDTO> {
   const response = await fetch("/api/clientes", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(dados),
   });
 
   if (!response.ok) {

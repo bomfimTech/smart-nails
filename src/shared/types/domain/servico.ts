@@ -1,6 +1,7 @@
-export type Servico = {
+
+export interface Servico {
   id: number;
   nome: string;
   duracao: number;
   preco: number;
-};
+}
