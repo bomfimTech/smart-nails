@@ -3,7 +3,7 @@ import { AgendamentoRepository } from "../repositories/agendamento.repository";
 
 import { ClienteRepository } from "@/modules/clientes/repositories/cliente.repository";
 
-export class CreateAgendamentoUseCase {
+export class CriarAgendamentoUseCase {
   private agendamentoRepository = new AgendamentoRepository();
   private clienteRepository = new ClienteRepository();
 

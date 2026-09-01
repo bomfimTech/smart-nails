@@ -1,10 +1,10 @@
 import { CreateAgendamentoDTO } from "../dto/create-agendamento.dto";
-import { CreateAgendamentoUseCase } from "../usecases/create-agendamentos.usecase";
+import { CriarAgendamentoUseCase } from "../usecases/criar-agendamento.usecase";
 
 export class CreateAgendamentoHandler {
   async handle(data: CreateAgendamentoDTO) {
     const createAgendamentoUseCase =
-      new CreateAgendamentoUseCase();
+      new CriarAgendamentoUseCase();
 
     return await createAgendamentoUseCase.execute(data);
   }

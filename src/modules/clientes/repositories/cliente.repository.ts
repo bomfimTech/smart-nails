@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 
-import { db } from "@/infrastructure/database";
+import { db } from "@/infrastructure/database/db";
 import { clientes } from "@/infrastructure/database/schemas/cliente.schema";
 import type { Cliente } from "@/shared/types/domain/cliente";
 

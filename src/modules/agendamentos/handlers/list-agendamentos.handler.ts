@@ -1,4 +1,4 @@
-import { ListAgendamentosUseCase } from "../usecases/list-agendamentos.usecase";
+import { ListAgendamentosUseCase } from "../usecases/listar-agendamentos.usecase";
 
 export class ListAgendamentosHandler {
   async handle() {

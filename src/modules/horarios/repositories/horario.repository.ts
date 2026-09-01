@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 
-import { db } from "@/infrastructure/database";
+import { db } from "@/infrastructure/database/db";
 import { horarios } from "@/infrastructure/database/schemas/horario.schema";
 import type { Horario } from "@/shared/types/domain/horario";
 

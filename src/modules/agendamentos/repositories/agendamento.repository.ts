@@ -1,4 +1,4 @@
-import { db } from "@/infrastructure/database";
+import { db } from "@/infrastructure/database/db";
 import { agendamentosTable } from "@/infrastructure/database/schemas/agendamento.schema";
 
 import { eq } from "drizzle-orm";

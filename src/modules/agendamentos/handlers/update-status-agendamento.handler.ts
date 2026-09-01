@@ -1,5 +1,5 @@
 import { UpdateStatusAgendamentoDTO } from "../dto/update-status-agendamento.dto";
-import { UpdateStatusAgendamentoUseCase } from "../usecases/update-status-agendamento.usecase";
+import { UpdateStatusAgendamentoUseCase } from "../usecases/editar-agendamento.usecase";
 
 export class UpdateStatusAgendamentoHandler {
   async handle(data: UpdateStatusAgendamentoDTO) {
