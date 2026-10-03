@@ -2,6 +2,7 @@ import { integer, pgTable, text } from "drizzle-orm/pg-core";
 
 import { clientes } from "./cliente.schema";
 import { servicos } from "./servico.schema";
+import { prestadoresTable } from "./prestador.schema";
 
 export const agendamentosTable = pgTable("agendamentos", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -10,6 +11,8 @@ export const agendamentosTable = pgTable("agendamentos", {
 
   horaInicio: text().notNull(),
 
+  horaFim: text().notNull(),
+
   clienteId: integer()
     .notNull()
     .references(() => clientes.id),
@@ -17,6 +20,10 @@ export const agendamentosTable = pgTable("agendamentos", {
   servicoId: integer()
     .notNull()
     .references(() => servicos.id),
+
+  prestadorId: integer()
+    .notNull()
+    .references(() => prestadoresTable.id),
 
   status: text().notNull(),
 });

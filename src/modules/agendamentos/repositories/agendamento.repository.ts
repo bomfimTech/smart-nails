@@ -1,7 +1,7 @@
+import { eq } from "drizzle-orm";
+
 import { db } from "@/infrastructure/database/db";
 import { agendamentosTable } from "@/infrastructure/database/schemas/agendamento.schema";
-
-import { eq } from "drizzle-orm";
 
 export class AgendamentoRepository {
   async create(data: typeof agendamentosTable.$inferInsert) {
